@@ -32,5 +32,7 @@ class FileHandler {
       ".status" #> theUpload.is.map(v => Text(storeFile(v.fileName, v.fileStream)))
       ) apply chooseTemplate("choose", "post", xhtml)
   
-  def renderBlog()
+  def renderBlog() = {
+
+  }
 }
