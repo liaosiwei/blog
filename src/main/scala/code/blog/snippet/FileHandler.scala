@@ -31,4 +31,6 @@ class FileHandler {
       ".md5" #> theUpload.is.map(v => Text(hexEncode(md5(v.file)))) &
       ".status" #> theUpload.is.map(v => Text(storeFile(v.fileName, v.fileStream)))
       ) apply chooseTemplate("choose", "post", xhtml)
+  
+  def renderBlog()
 }

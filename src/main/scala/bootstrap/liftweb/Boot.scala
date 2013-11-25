@@ -51,6 +51,7 @@ class Boot {
           Menu("删除博客") / "blog" / "delete",
           Menu("下载博客") / "blog" / "download"
       ),
+      Menu("我的博客") / "blog" / "display",
 
       // more complex because this menu allows anything in the
       // /static path to be visible
