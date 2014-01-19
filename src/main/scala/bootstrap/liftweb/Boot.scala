@@ -45,7 +45,7 @@ class Boot {
       Menu("Home") / "index",// >> User.AddUserMenusAfter, // the simple way to declareb a menu
 //      Menu("用户账户") / "user" submenus(
 //          Menu("代替") / "tobetaken" >> User.AddUserMenusHere), 
-      Menu("用户账户") / "user" >> User.AddUserMenusUnder,
+      Menu("用户账户") / "user" >> User.AddUserMenusHere,
       Menu("博客设置") / "blog" / "index" submenus(
           Menu("上传博客") / "blog" / "add",
           Menu("删除博客") / "blog" / "delete",
