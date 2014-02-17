@@ -21,8 +21,8 @@ import net.liftmodules.JQueryModule
 class Boot {
   def boot {
 
-    // see: https://fmpwizard.telegr.am/blog/lift-and-h2 for viewing h2 tables
-    //if (Props.devMode || Props.testMode) {
+/*     see: https://fmpwizard.telegr.am/blog/lift-and-h2 for viewing h2 tables
+    if (Props.devMode || Props.testMode) {*/
     LiftRules.liftRequest.append({case r if (r.path.partPath match {
       case "console" :: _ => true
       case _ => false}
@@ -41,26 +41,18 @@ class Boot {
       DB.defineConnectionManager(DefaultConnectionIdentifier, vendor)
     }
 
-    // Use Lift's Mapper ORM to populate the database
-    // you don't need to use Mapper to use Lift... use
-    // any ORM you want
-    Schemifier.schemify(true, Schemifier.infoF _, User)
+    Schemifier.schemify(true, Schemifier.infoF _, User, Post)
 
     // where to search snippet
     LiftRules.addToPackages("code.blog")
 
+    val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
     // Build SiteMap
     def sitemap = SiteMap(
-      Menu("Home") / "index",// >> User.AddUserMenusAfter, // the simple way to declareb a menu
-//      Menu("用户账户") / "user" submenus(
-//          Menu("代替") / "tobetaken" >> User.AddUserMenusHere), 
-      Menu("用户账户") / "user" >> User.AddUserMenusHere,
-      Menu("博客设置") / "blog" / "index" submenus(
-          Menu("上传博客") / "blog" / "add",
-          Menu("删除博客") / "blog" / "delete",
-          Menu("下载博客") / "blog" / "download"
-      ),
-      Menu("我的博客") / "blog" / "display",
+      Menu.i("Home") / "index" >> Hidden,
+      Menu("User Account", "账户管理") / "user" >> User.AddUserMenusHere >> IfLoggedIn,
+      Menu("Blog Upload", "上传博客") / "blog" / "index" >> IfLoggedIn,
+      Menu("Display Blog", "所有博客") / "blog" / "display" >> IfLoggedIn,
 
       // more complex because this menu allows anything in the
       // /static path to be visible
@@ -93,9 +85,9 @@ class Boot {
     // What is the function to test if a user is logged in?
     LiftRules.loggedInTest = Full(() => User.loggedIn_?)
 
-    // Use HTML5 for rendering
-    LiftRules.htmlProperties.default.set((r: Req) =>
-      new Html5Properties(r.userAgent))
+    // Use HTML5 for rendering while is default since 2.6
+/*    LiftRules.htmlProperties.default.set((r: Req) =>
+      new Html5Properties(r.userAgent))*/
 
     // Make a transaction span the whole HTTP request
     S.addAround(DB.buildLoanWrapper)

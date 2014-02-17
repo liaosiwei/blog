@@ -1,3 +1,10 @@
-<div id="main" class="lift:surround?with=default;at=content">
-  在这里进行博客的设置。
+<div data-lift="surround?with=default">
+    <div data-lift="bind-at?name=content-right">
+        <form data-lift="FileHandler?form=post;multipart=true">
+            <label for="file">
+                选择文件 <input id="file" />
+            </label>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
 </div>

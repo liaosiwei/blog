@@ -43,7 +43,7 @@ class User extends MegaProtoUser[User] {
     override def displayName = "个人说明"
   }
 
-  object userPic extends MappedBinary(this)
+  //object userPic extends MappedBinary(this)
 
   def posts: List[Post] = Post.findAll(By(Post.owner, id.get))
 }

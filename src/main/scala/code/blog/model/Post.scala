@@ -1,6 +1,9 @@
 package code.blog.model
 
 import net.liftweb.mapper._
+import net.liftweb.markdown
+import java.text.DateFormat
+import scala.xml.Text
 
 /**
  * User: sweeliao@gmail.com
@@ -11,12 +14,16 @@ class Post extends LongKeyedMapper[Post] with IdPK {
   def getSingleton = Post
 
   object owner extends MappedLongForeignKey(this, User)
-  object title extends MappedString(this, 140)
+  object name extends MappedString(this, 140)
   object contents extends MappedText(this)
-  object published extends MappedBoolean(this)
+  object dateOf extends MappedDateTime(this) {
+    final val dateFormat =
+      DateFormat.getDateInstance(DateFormat.SHORT)
+    override def asHtml = Text(dateFormat.format(get))
+  }
 }
 
 object Post extends Post with LongKeyedMetaMapper[Post] {
-  def findByTitle(owner: User, title: String): List[Post] =
-    Post.findAll(By(Post.owner, owner.id.get), By(Post.title, title))
+  def findByName(owner: User, name: String): List[Post] =
+    Post.findAll(By(Post.owner, owner.id.get), By(Post.name, name))
 }

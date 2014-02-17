@@ -1,49 +1,18 @@
 <div data-lift="surround?with=default">
     <div data-lift="bind-at?name=content-left">
+        <hr>
         <div class="right lift:HomePage.left">
             <span class="lift:Menu.item?name=Login border">登陆</span><span class="lift:Menu.item?name=CreateUser">注册</span>
         </div>
     </div>
 
     <div data-lift="bind-at?name=content-right">
-        <h6 class="bottom quiet">PINNED POST</h6>
-        <hr/>
-        <div>
-            <h2 class="bottom">第一篇博文</h2>
-        <span class="quiet">
-            tags:
-            <a>scala</a>
-            <a>java</a>
-        </span>
-            <span class="right">by <a>William</a></span>
-
-            <p>This is the first blog here 不过字体貌似有点小呀</p>
-        </div>
-        <div>
-            <h2 class="bottom">First Blog</h2>
-        <span class="quiet">
-            tags:
-            <a>scala</a>
-            <a>java</a>
-        </span>
-            <span class="right">by <a>William</a></span>
-
-            <p>This is the first blog here</p>
-        </div>
-
-        <br>
         <h6 class="bottom quiet">RECENT POST</h6>
         <hr/>
-        <div>
-            <h2 class="bottom">Second Blog</h2>
-        <span class="quiet">
-            tags:
-            <a>scala</a>
-            <a>java</a>
-        </span>
-            <span class="right">by <a>William</a></span>
-
-            <p>This is the second blog here</p>
+        <div class="right lift:HomePage.right">
+            <ul>
+                <li id="item"></li>
+            </ul>
         </div>
     </div>
 </div>
