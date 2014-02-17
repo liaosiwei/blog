@@ -20,6 +20,15 @@ import net.liftmodules.JQueryModule
  */
 class Boot {
   def boot {
+
+    // see: https://fmpwizard.telegr.am/blog/lift-and-h2 for viewing h2 tables
+    //if (Props.devMode || Props.testMode) {
+    LiftRules.liftRequest.append({case r if (r.path.partPath match {
+      case "console" :: _ => true
+      case _ => false}
+      ) => false})
+  //}
+
     if (!DB.jndiJdbcConnAvailable_?) {
       val vendor =
         new StandardDBVendor(Props.get("db.driver") openOr "org.h2.Driver",

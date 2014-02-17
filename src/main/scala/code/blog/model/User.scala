@@ -45,6 +45,6 @@ class User extends MegaProtoUser[User] {
 
   object userPic extends MappedBinary(this)
 
-  def posts: List[Post] = Post.findAll(By(Post.owner, id))
+  def posts: List[Post] = Post.findAll(By(Post.owner, id.get))
 }
 
