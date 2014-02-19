@@ -15,7 +15,9 @@ class FileHandler extends Loggable {
         case Full(FileParamHolder(_, mimeType, fileName, file)) => {
           if (mimeType == "text/plain") {
             try {
-              Post.create.owner(user).name(fileName).contents(new String(file, "UTF8")).save()
+              Post.create.owner(user).name(fileName).
+                contents(new String(file, "UTF8")).
+                dateOf(new java.util.Date()).save()
               S.notice("upload done.")
             } catch {
               case e: Exception =>

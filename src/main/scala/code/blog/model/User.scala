@@ -3,14 +3,16 @@ package model
 
 import net.liftweb.mapper._
 import net.liftweb.common._
+import net.liftweb.sitemap.Menu
+import net.liftweb.http.S
 
 /**
  * The singleton that has methods for accessing the database
  */
 object User extends User with MetaMegaProtoUser[User] {
   override def dbTableName = "users" // define the DB table name
-  override def screenWrap = Full(<lift:surround with="default" at="content-right">
-      <div id="formBox">
+  override def screenWrap = Full(<lift:surround with="default" at="content">
+      <div>
         <lift:bind/>
       </div>
     </lift:surround>)

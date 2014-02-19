@@ -1,18 +1,5 @@
-<div data-lift="surround?with=default">
-    <div data-lift="bind-at?name=content-left">
-        <hr>
-        <div class="right lift:HomePage.left">
-            <span class="lift:Menu.item?name=Login border">登陆</span><span class="lift:Menu.item?name=CreateUser">注册</span>
-        </div>
-    </div>
-
-    <div data-lift="bind-at?name=content-right">
-        <h6 class="bottom quiet">RECENT POST</h6>
-        <hr/>
-        <div class="right lift:HomePage.right">
-            <ul>
-                <li id="item"></li>
-            </ul>
-        </div>
+<div data-lift="surround?with=default&at=content">
+    <div data-lift="HomePage">
+        <div id="item"></div>
     </div>
 </div>

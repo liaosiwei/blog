@@ -10,10 +10,13 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.nio.file.StandardOpenOption.APPEND
 import java.nio.file.StandardOpenOption.CREATE
+import java.text.SimpleDateFormat
 
 object Utils {
 
-  def storeFile(filename: String, inputStream: InputStream): String = {
+  val slashDate = new SimpleDateFormat("yyyy-MM-dd")
+
+/*  def storeFile(filename: String, inputStream: InputStream): String = {
     
     def getPath(filename: String): Path = {
       val file_root = Paths.get("/upload/files/")
@@ -38,5 +41,5 @@ object Utils {
     inputStream.close
     out.close
     "succeed"
-  }
+  }*/
 }
