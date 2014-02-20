@@ -52,9 +52,9 @@ class Boot {
       Menu("Home", " 主页") / "index",
       Menu("User Account", "账户管理") / "user" >> User.AddUserMenusHere >> IfLoggedIn,
       Menu("Blog Upload", "上传博客") / "blog" / "index" >> IfLoggedIn,
-      Menu("Blog Posted", "所有博客") / "blog" / "display" >> LocGroup("otherview") >> IfLoggedIn,
-      Menu("Project", "项目") / "project" / "index" >> LocGroup("otherview"),
-      Menu("Readings", "读物") / "reading" / "index" >> LocGroup("otherview"),
+/*      Menu("Blog Posted", "所有博客") / "blog" / "display" >> IfLoggedIn,*/
+      Menu("Project", "项目") / "project" / "index" >> Hidden >> LocGroup("otherview"),
+      Menu("Readings", "读物") / "reading" / "index" >> Hidden >> LocGroup("otherview"),
 
       // more complex because this menu allows anything in the
       // /static path to be visible

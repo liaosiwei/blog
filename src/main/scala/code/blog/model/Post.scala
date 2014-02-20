@@ -1,9 +1,9 @@
 package code.blog.model
 
 import net.liftweb.mapper._
-import net.liftweb.markdown
 import java.text.DateFormat
 import scala.xml.Text
+import net.liftweb.common.{Failure, Empty, Full}
 
 /**
  * User: sweeliao@gmail.com

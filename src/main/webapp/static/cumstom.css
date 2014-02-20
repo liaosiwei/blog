@@ -6,12 +6,12 @@ body {
 }
 
 #wrapper {
-    width: 650px;
+    width: 850px;
     margin: 60px auto;
 }
 
 #main {
-    width: 480px;
+    width: 680px;
 
     background: white;
     padding: 10px;
@@ -84,8 +84,24 @@ li {
     margin-top: 15px;
 }
 
-ul {
+/*ul {
     -webkit-padding-start: 20px;
+}*/
+
+
+article h5{
+    text-align: center;
+}
+
+time {
+    background: none repeat scroll 0 0 #FFFFFF;
+    text-align: center;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0 8px;
+    position: relative;
+    top: 8px;
+    color: #f28705;
 }
 
 .thumbnail {
@@ -112,4 +128,8 @@ blockquote {
     line-height: 1.8;
     border-left: 5px solid #ddd;
     padding-left: 1.5em;
+}
+
+h1 {
+    text-align: center;
 }
