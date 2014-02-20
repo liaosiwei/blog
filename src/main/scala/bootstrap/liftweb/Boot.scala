@@ -13,6 +13,7 @@ import mapper._
 
 import code.blog.model._
 import net.liftmodules.JQueryModule
+import code.test.snippet.Param
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -45,6 +46,8 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("code.blog")
+    LiftRules.addToPackages("code.test")
+
 
     val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
     // Build SiteMap
@@ -55,6 +58,19 @@ class Boot {
 /*      Menu("Blog Posted", "所有博客") / "blog" / "display" >> IfLoggedIn,*/
       Menu("Project", "项目") / "project" / "index" >> Hidden >> LocGroup("otherview"),
       Menu("Readings", "读物") / "reading" / "index" >> Hidden >> LocGroup("otherview"),
+
+      Menu("测试用例") / "test" / "index" submenus(
+        Menu("嵌入页面") / "test" / "embeded",
+        Menu("表单提交") / "test" / "form",
+        Menu("screen example") / "test" / "screen"
+      ),
+      Param.menu,
+/*      Menu.param[Which]("Recurse", "Recurse",
+      {case "one" => Full(First())
+      case "two" => Full(Second())
+      case "both" => Full(Both())
+      case _ => Empty},
+      w => w.toString) / "recurse",*/
 
       // more complex because this menu allows anything in the
       // /static path to be visible
