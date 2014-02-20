@@ -14,7 +14,7 @@ class FileHandler extends Loggable {
       var upload : Box[FileParamHolder] = Empty
       def processForm() = upload match {
         case Full(FileParamHolder(_, mimeType, fileName, file)) => {
-          if (mimeType == "text/plain") {
+          if ((mimeType == "text/plain") && (!file.isEmpty)) {
             try {
               Post.create.owner(user).name(fileName).
                 contents(new String(file, "UTF8")).
@@ -25,9 +25,9 @@ class FileHandler extends Loggable {
                 logger.error("couldn't write to database.")
             }
           }
-          else S.notice("is upload file text?")
+          else S.notice("is upload file text and not empty?")
         }
-        case _ => logger.warn("No file?")
+        case _ => S.error("No file?")
       }
       "#file" #> fileUpload(f => upload = Full(f)) &
         "type=submit" #> onSubmitUnit(processForm)

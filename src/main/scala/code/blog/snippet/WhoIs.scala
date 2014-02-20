@@ -17,7 +17,10 @@ object WhoIs {
       val profile = User.findById(user.toLong)
       profile match {
         case Nil =>   "#inner *" #> Text("暂无个人说明")
-        case x => "#inner *" #> x.map(y => Text(y.textArea.get))
+        case x => {
+          "#name *" #> x.map(y => Text(y.shortName)) &
+          "#intro *" #> x.map(y => Text({val txt = y.textArea.get; if (txt.isEmpty) "博主很懒，没留下太多。。。" else txt}))
+        }
       }
 
     }

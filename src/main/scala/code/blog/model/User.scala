@@ -3,8 +3,9 @@ package model
 
 import net.liftweb.mapper._
 import net.liftweb.common._
-import net.liftweb.sitemap.Menu
-import net.liftweb.http.S
+import net.liftweb.sitemap.Loc.LocGroup
+import net.liftweb.http.S._
+import net.liftweb.common.Full
 import net.liftweb.sitemap.Loc.LocGroup
 
 /**
@@ -27,7 +28,15 @@ object User extends User with MetaMegaProtoUser[User] {
   override def signupFields: List[FieldPointerType] = List(firstName,
     lastName,
     email,
-    password)
+    password,
+    textArea
+  )
+
+  override def editFields: List[FieldPointerType] = List(firstName,
+    lastName,
+    email,
+    locale,
+    textArea)
 
   // to override the redirected page after user login in successfully
   override def homePage = "/"
