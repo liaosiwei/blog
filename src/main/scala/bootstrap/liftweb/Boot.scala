@@ -13,7 +13,6 @@ import mapper._
 
 import code.blog.model._
 import net.liftmodules.JQueryModule
-import code.test.snippet.Param
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -52,19 +51,15 @@ class Boot {
     val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
     // Build SiteMap
     def sitemap = SiteMap(
-      Menu("Home", " 主页") / "index",
-      Menu("User Account", "账户管理") / "user" >> User.AddUserMenusHere >> IfLoggedIn,
-      Menu("Blog Upload", "上传博客") / "upload" >> IfLoggedIn,
-/*      Menu("Blog Posted", "所有博客") / "blog" / "display" >> IfLoggedIn,*/
-/*      Menu("Project", "项目") / "project" / "index" >> Hidden >> LocGroup("otherview"),
-      Menu("Readings", "读物") / "reading" / "index" >> Hidden >> LocGroup("otherview"),
+      Menu("Home", " 主页") / "index" >> LocGroup("profile", "main"),
+      Menu("User Account", "账户管理") / "user" >> User.AddUserMenusHere ,
+      Menu("Blog Upload", "上传博客") / "upload" >> IfLoggedIn >> LocGroup("main"),
+      /*Param.menu >> Hidden,*/
 
-      Menu("测试用例") / "test" / "index" submenus(
-        Menu("嵌入页面") / "test" / "embeded",
-        Menu("表单提交") / "test" / "form",
-        Menu("screen example") / "test" / "screen"
-      ),
-      Param.menu,*/
+      Menu("Blog Posted", "所有博客") / "blog" / ** >> Hidden,
+      Menu("Self Introduction", "自我介绍") / "whois" / ** >> LocGroup("profile"),
+      Menu("Project", "项目") / "project" / "index" >> LocGroup("profile"),
+      Menu("Readings", "读物") / "reading" / "index" >> LocGroup("profile"),
 
       // more complex because this menu allows anything in the
       // /static path to be visible

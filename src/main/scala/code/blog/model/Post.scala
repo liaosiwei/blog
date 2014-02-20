@@ -26,4 +26,6 @@ class Post extends LongKeyedMapper[Post] with IdPK {
 object Post extends Post with LongKeyedMetaMapper[Post] {
   def findByName(owner: User, name: String): List[Post] =
     Post.findAll(By(Post.owner, owner.id.get), By(Post.name, name))
+
+  def findById(theId: Long): List[Post] = Post.findAll(By(id, theId))
 }

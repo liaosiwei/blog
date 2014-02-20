@@ -29,6 +29,14 @@ object HomePage/* extends DispatchSnippet*/{
     })).apply(origin)
   }
 
+  def renderBlog(posts: List[Post]) =
+    "#item *" #> posts.map(p => {
+    ".sepline *" #> <time>{slashDate.format(p.dateOf.get)}</time> &
+      ".post" #> getHtml(p.contents.get) &
+      ".author *" #> <p>Posted By <a id="who" href="#">{p.owner.obj.map(_.shortName).open_!}</a></p> andThen
+      ("#title [href]" #> ("/blog?id=" + p.id.get) &
+        "#who [href]" #> ("/whois?id=" + p.owner.obj.map(_.id.get).open_!))
+    })
 /*  def dispatch: DispatchIt = {
     case "renderBlog" => render _
   }*/
@@ -38,14 +46,7 @@ object HomePage/* extends DispatchSnippet*/{
     val posts: List[Post] = Post.findAll(OrderBy(Post.dateOf, Descending)).take(postlength)
     posts match {
       case Nil => "#item *" #> Text("no blog posted yet..")
-      case blogs => "#item *" #> blogs.map(p => {
-        ".sepline *" #> <time>{slashDate.format(p.dateOf.get)}</time> &
-          ".post" #> getHtml(p.contents.get) &
-          ".author *" #> <p>Posted By {p.owner.obj.map(_.shortName) openOr Text("no author recording")}</p> andThen(
-          "#title [href]" #> ("/blog/" + p.id.get)
-          )
-        }
-      )
+      case x => renderBlog(x)
     }
   }
 }

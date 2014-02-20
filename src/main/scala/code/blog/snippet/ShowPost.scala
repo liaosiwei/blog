@@ -1,7 +1,12 @@
 package code.blog.snippet
 
 import net.liftweb.sitemap.Menu
-import net.liftweb.common.Full
+import net.liftweb.common.{Empty, Full}
+import net.liftweb.util.Helpers._
+import net.liftweb.http.S
+import scala.xml.Text
+import code.blog.model.Post
+import net.liftweb.mapper.By
 
 /**
  * User: sweeliao@gmail.com
@@ -9,11 +14,15 @@ import net.liftweb.common.Full
  * Time: 下午5:30
  */
 
-case class PostId(theParam: String)
-
-object ShowPost {
-  val menu = Menu.param[PostId]("Param", "Param", s => Full(PostId(s)), pi => pi.theParam) / "param"
-  lazy val loc = menu.toLoc
-  ​
-  def render = "*" #> loc.currentValue.map(_.theParam)
+object ShowPost{
+  def render = S.param("id") match {
+    case Full(id) => {
+      val post = Post.findById(id.toLong)
+      post match {
+        case Nil => "#item *" #> Text("没有这篇博客！")
+        case x => HomePage.renderBlog(x)
+      }
+    }
+    case _ => "*" #> Text("访问出错")
+  }
 }

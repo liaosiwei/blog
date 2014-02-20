@@ -5,6 +5,7 @@ import net.liftweb.mapper._
 import net.liftweb.common._
 import net.liftweb.sitemap.Menu
 import net.liftweb.http.S
+import net.liftweb.sitemap.Loc.LocGroup
 
 /**
  * The singleton that has methods for accessing the database
@@ -30,6 +31,11 @@ object User extends User with MetaMegaProtoUser[User] {
 
   // to override the redirected page after user login in successfully
   override def homePage = "/"
+
+  /*
+  * Add the LocGroup to the user menu items so we can put them in a separate menu.
+  */
+  override def globalUserLocParams = LocGroup("main") :: super.globalUserLocParams
 }
 
 /**
@@ -48,5 +54,6 @@ class User extends MegaProtoUser[User] {
   //object userPic extends MappedBinary(this)
 
   def posts: List[Post] = Post.findAll(By(Post.owner, id.get))
+  def findById(theId: Long): List[User] = User.findAll(By(id, theId))
 }
 
