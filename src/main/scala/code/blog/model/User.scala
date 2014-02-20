@@ -12,7 +12,7 @@ import net.liftweb.http.S
 object User extends User with MetaMegaProtoUser[User] {
   override def dbTableName = "users" // define the DB table name
   override def screenWrap = Full(<lift:surround with="default" at="content">
-      <div>
+      <div id="cusbox">
         <lift:bind/>
       </div>
     </lift:surround>)

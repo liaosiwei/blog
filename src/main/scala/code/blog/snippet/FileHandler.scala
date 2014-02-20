@@ -5,6 +5,7 @@ import net.liftweb.http.SHtml._
 import net.liftweb.http.{S, FileParamHolder}
 import net.liftweb.common.{Loggable, Full, Empty, Box}
 import code.blog.model.{Post, User}
+import scala.xml.Text
 
 class FileHandler extends Loggable {
 
@@ -31,5 +32,6 @@ class FileHandler extends Loggable {
       "#file" #> fileUpload(f => upload = Full(f)) &
         "type=submit" #> onSubmitUnit(processForm)
     }
+    case _ => Text("something is wrong")
   }
 }

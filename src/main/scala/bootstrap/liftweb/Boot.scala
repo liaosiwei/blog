@@ -22,13 +22,13 @@ import code.test.snippet.Param
 class Boot {
   def boot {
 
-/*     see: https://fmpwizard.telegr.am/blog/lift-and-h2 for viewing h2 tables
-    if (Props.devMode || Props.testMode) {*/
-    LiftRules.liftRequest.append({case r if (r.path.partPath match {
-      case "console" :: _ => true
-      case _ => false}
-      ) => false})
-  //}
+/*     see: https://fmpwizard.telegr.am/blog/lift-and-h2 for viewing h2 tables */
+    if (Props.devMode || Props.testMode) {
+      LiftRules.liftRequest.append({case r if (r.path.partPath match {
+        case "console" :: _ => true
+        case _ => false}
+        ) => false})
+    }
 
     if (!DB.jndiJdbcConnAvailable_?) {
       val vendor =
@@ -54,9 +54,9 @@ class Boot {
     def sitemap = SiteMap(
       Menu("Home", " 主页") / "index",
       Menu("User Account", "账户管理") / "user" >> User.AddUserMenusHere >> IfLoggedIn,
-      Menu("Blog Upload", "上传博客") / "blog" / "index" >> IfLoggedIn,
+      Menu("Blog Upload", "上传博客") / "upload" >> IfLoggedIn,
 /*      Menu("Blog Posted", "所有博客") / "blog" / "display" >> IfLoggedIn,*/
-      Menu("Project", "项目") / "project" / "index" >> Hidden >> LocGroup("otherview"),
+/*      Menu("Project", "项目") / "project" / "index" >> Hidden >> LocGroup("otherview"),
       Menu("Readings", "读物") / "reading" / "index" >> Hidden >> LocGroup("otherview"),
 
       Menu("测试用例") / "test" / "index" submenus(
@@ -64,13 +64,7 @@ class Boot {
         Menu("表单提交") / "test" / "form",
         Menu("screen example") / "test" / "screen"
       ),
-      Param.menu,
-/*      Menu.param[Which]("Recurse", "Recurse",
-      {case "one" => Full(First())
-      case "two" => Full(Second())
-      case "both" => Full(Both())
-      case _ => Empty},
-      w => w.toString) / "recurse",*/
+      Param.menu,*/
 
       // more complex because this menu allows anything in the
       // /static path to be visible
