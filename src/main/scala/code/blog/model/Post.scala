@@ -28,4 +28,6 @@ object Post extends Post with LongKeyedMetaMapper[Post] {
     Post.findAll(By(Post.owner, owner.id.get), By(Post.name, name))
 
   def findById(theId: Long): List[Post] = Post.findAll(By(id, theId))
+
+  def findByOwnerId(id: Long): List[Post] = Post.findAll(By(owner, id), OrderBy(dateOf, Descending))
 }

@@ -56,10 +56,11 @@ class Boot {
       Menu("Blog Upload", "上传博客") / "upload" >> IfLoggedIn >> LocGroup("main"),
       /*Param.menu >> Hidden,*/
 
-      Menu("Blog Posted", "所有博客") / "blog" / ** >> Hidden,
-      Menu("Self Introduction", "自我介绍") / "whois" / ** >> LocGroup("profile"),
-      Menu("Project", "项目") / "project" / "index" >> LocGroup("profile"),
-      Menu("Readings", "读物") / "reading" / "index" >> LocGroup("profile"),
+      Menu("Blog Posted", "所有博客") / "blog" >> Hidden,
+      Menu("Self Introduction", "自我介绍") / "whois" >> LocGroup("profile"),
+      Menu("Blog Archive", "博客存档") / "archive" >> LocGroup("profile"),
+      Menu("Project", "项目") / "project" >> LocGroup("profile"),
+      Menu("Readings", "读物") / "reading" >> LocGroup("profile"),
 
       // more complex because this menu allows anything in the
       // /static path to be visible
