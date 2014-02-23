@@ -1,0 +1,18 @@
+body {
+    background-color: #BEF56E;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+#wrapper {
+    width: 650px;
+    margin: 60px auto;
+}
+
+#main {
+    width: 480px;
+}
+
+h1 {
+    text-align: left;
+}

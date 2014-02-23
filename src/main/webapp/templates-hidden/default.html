@@ -1,4 +1,5 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:lift="http://liftweb.net/">
+<!DOCTYPE html>
+<html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <meta name="description" content=""/>
@@ -11,20 +12,13 @@
 </head>
 <body>
 <div id="wrapper">
+
     <div id="sidenav">
-        <div data-lift="Menu.builder?group=main"></div>
+        <div data-lift="Menu.builder"></div>
     </div>
     <div id="main">
-        <div id="content">
-        </div>
-        <img alt="" id="ajax-loader" style="display:none; margin-bottom: 0px; margin-left: 5px" src="/images/ajax-loader.gif">
-        <div class="lift:Msgs?errorClass=errorBox&noticeClass=noticeBox&warningClass=warningBox&showAll=true"></div>
-        <div id="footer" style="text-align: center">
-            <p>© sweeliao, 2014. Powered by using
-                <a href="http://www.liftweb.net"><i>Lift</i></a>
-            </p>
-        </div>
-
+        <div id="content"></div>
+        <div data-lift="embed?what=footer"></div>
     </div>
 
 </div>

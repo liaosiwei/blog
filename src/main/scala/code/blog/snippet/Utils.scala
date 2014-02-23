@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat
 object Utils {
 
   val slashDate = new SimpleDateFormat("yyyy-MM-dd")
+  val slashYear = new SimpleDateFormat("yyyy")
 
 /*  def storeFile(filename: String, inputStream: InputStream): String = {
     

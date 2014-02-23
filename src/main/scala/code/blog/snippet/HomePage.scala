@@ -35,7 +35,7 @@ object HomePage/* extends DispatchSnippet*/{
       ".post" #> getHtml(p.contents.get) &
       ".author *" #> <p>Posted By <a id="who" href="#">{p.owner.obj.map(_.shortName).open_!}</a></p> andThen
       ("#title [href]" #> ("/blog?id=" + p.id.get) &
-        "#who [href]" #> ("/whois?id=" + p.owner.obj.map(_.id.get).open_!))
+        "#who [href]" #> ("/userprofile/" + p.owner.obj.map(_.id.get).open_!))
     })
 /*  def dispatch: DispatchIt = {
     case "renderBlog" => render _

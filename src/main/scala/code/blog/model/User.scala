@@ -44,7 +44,7 @@ object User extends User with MetaMegaProtoUser[User] {
   /*
   * Add the LocGroup to the user menu items so we can put them in a separate menu.
   */
-  override def globalUserLocParams = LocGroup("main") :: super.globalUserLocParams
+/*  override def globalUserLocParams = LocGroup("main") :: super.globalUserLocParams*/
 }
 
 /**

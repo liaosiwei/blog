@@ -2,17 +2,18 @@ package bootstrap.liftweb
 
 import net.liftweb._
 import util._
-import Helpers._
 
-import common._
 import http._
 import js.jquery.JQueryArtifacts
 import sitemap._
-import Loc._
+import net.liftweb.sitemap.Loc._
 import mapper._
 
 import code.blog.model._
 import net.liftmodules.JQueryModule
+import code.blog.snippet.{BlogArchiveParam, UserProfileParam}
+import net.liftweb.common.Full
+import net.liftweb.sitemap.Loc.If
 
 /**
  * A class that's instantiated early and run.  It allows the application
@@ -45,22 +46,39 @@ class Boot {
 
     // where to search snippet
     LiftRules.addToPackages("code.blog")
-    LiftRules.addToPackages("code.test")
+
+    /*LiftRules.statefulRewrite.append {
+      case RewriteRequest(ParsePath("myspace" :: Nil,_,_,_),_,_) if User.currentUser.isDefined =>
+          RewriteResponse("userprofile" :: User.currentUser.map(_.id.get.toString).open_! :: Nil)
+    }*/
+
+/*    LiftRules.dispatch.prepend {
+      case Req("myspace" :: Nil, _, _)  if User.currentUser.isDefined => () =>
+      Full(RedirectWithState("/userprofile/" + User.currentUser.map(_.id.get.toString).open_!,
+        RedirectState(() => (), "redirecting"->NoticeType.Notice)))
+    }*/
+
+    LiftRules.dispatch.prepend {
+      case Req("myspace" :: Nil, _, _)  if User.currentUser.isDefined => () =>
+      Full(RedirectResponse("/userprofile/" + User.currentUser.map(_.id.get.toString).open_!))
+    }
+
 
 
     val IfLoggedIn = If(() => User.currentUser.isDefined, "You must be logged in")
     // Build SiteMap
     def sitemap = SiteMap(
-      Menu("Home", " 主页") / "index" >> LocGroup("profile", "main"),
+      Menu("Home", " Lifted Blog") / "index",
       Menu("User Account", "账户管理") / "user" >> User.AddUserMenusHere ,
-      Menu("Blog Upload", "上传博客") / "upload" >> IfLoggedIn >> LocGroup("main"),
+      Menu("Blog Upload", "上传博客") / "upload" >> IfLoggedIn,
+      Menu("My Home", "我的主页") / "myspace" >> IfLoggedIn,
       /*Param.menu >> Hidden,*/
 
       Menu("Blog Posted", "所有博客") / "blog" >> Hidden,
-      Menu("Self Introduction", "自我介绍") / "whois" >> LocGroup("profile"),
-      Menu("Blog Archive", "博客存档") / "archive" >> LocGroup("profile"),
-      Menu("Project", "项目") / "project" >> LocGroup("profile"),
-      Menu("Readings", "读物") / "reading" >> LocGroup("profile"),
+      UserProfileParam.menu >> Hidden,
+      BlogArchiveParam.menu >> Hidden,
+/*      Menu("Project", "项目") / "project" >> LocGroup("profile"),
+      Menu("Readings", "读物") / "reading" >> LocGroup("profile"),*/
 
       // more complex because this menu allows anything in the
       // /static path to be visible
